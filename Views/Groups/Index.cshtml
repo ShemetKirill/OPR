@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CourseOPR.Models.Group>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список групп</h1>
+
+<p>
+    <a asp-action="Create">Добавить новую</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Номер группы
+            </th>
+            <th>
+                Специальность
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Speciality.SpecialityName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GroupId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.GroupId">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.GroupId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

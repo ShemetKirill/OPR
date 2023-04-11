@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CourseOPR.Models.Speciality>
+
+@{
+    ViewData["Title"] = "Спецаильности";
+}
+
+<h1>Специальности</h1>
+
+<p>
+    <a asp-action="Create">Добавить новую</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название специальности
+            </th>
+            <th>
+                Название факультета
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SpecialityId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.SpecialityId">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.SpecialityId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

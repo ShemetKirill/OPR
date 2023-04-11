@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CourseOPR.Models.Score>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Электронная выписка всех студентов</h1>
+
+<p>
+    <a asp-action="Create">Добавить новую оценку</a>    |
+    <a asp-action="Parse">Считать с файла</a>   |
+     <a asp-action="SelectStudent">Выбрать студента </a>   |
+</p>
+@*<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="View">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="" class="control-label"></label>
+                <select asp-for="SpecialityId" class ="form-control" asp-items="ViewBag.SpecialityId"></select>
+            </div>
+        </form>
+    </div>
+</div>*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Оценка
+            </th>
+            <th>
+                Студент
+            </th>
+            <th>
+                Название предмета
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScoreValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.StudentFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ScoreId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.ScoreId">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.ScoreId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

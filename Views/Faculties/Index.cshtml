@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CourseOPR.Models.Faculty>
+
+@{
+    ViewData["Title"] = "Список факультетов";
+}
+
+<h1>Факультеты</h1>
+
+<p>
+    <a asp-action="Create">Создать новый</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название факультетов
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacultyName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FacultyId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.FacultyId">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.FacultyId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

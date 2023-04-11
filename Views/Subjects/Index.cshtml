@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CourseOPR.Models.Subject>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Предметы</h1>
+
+<p>
+    <a asp-action="Create">Добавить новый</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Предмет
+            </th>
+            <th>
+                Часы
+            </th>
+            <th>
+                Семестр
+            </th>
+            <th>
+                Специальность
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Semester)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Speciality.SpecialityName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SubjectId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.SubjectId">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.SubjectId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

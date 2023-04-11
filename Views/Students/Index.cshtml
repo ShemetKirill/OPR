@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CourseOPR.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список студентов</h1>
+
+<p>
+    <a asp-action="Create">Добавить нового</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Студент(ка)
+            </th>
+            <th>
+                Номер группы
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.GroupNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StudentId">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.StudentId">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.StudentId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
