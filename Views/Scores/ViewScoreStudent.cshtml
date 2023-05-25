@@ -4,7 +4,11 @@
     ViewData["Title"] = "View";
 }
 
-<h1>Электронная выписка выбранного студента </h1>
+<h1>Электронная выписка  студента   @Html.DisplayFor(modelItem=>@Model.First().Student.StudentFullName) </h1>
+
+<p>
+    <a asp-action="GeneratePdf" asp-route-id="@Model.First().Student.StudentId"> Создать выписку </a>
+</p>
 
 
 <table class="table">
@@ -12,9 +16,6 @@
         <tr>
             <th>
                 Оценка
-            </th>
-            <th>
-                Студент
             </th>
             <th>
                 Название предмета
@@ -30,14 +31,10 @@
                     @Html.DisplayFor(modelItem => item.ScoreValue)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Student.StudentFullName)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Subject.SubjectName)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ScoreId">Изменить</a> |
-                    <a asp-action="Details" asp-route-id="@item.ScoreId">Подробнее</a> |
                     <a asp-action="Delete" asp-route-id="@item.ScoreId">Удалить</a>
                 </td>
             </tr>

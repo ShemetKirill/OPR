@@ -6,6 +6,7 @@ using CourseOPR.Models;
 using Microsoft.AspNetCore.Authorization;
 using CourseOPR.Servises;
 using static System.Formats.Asn1.AsnWriter;
+using iText.Kernel.Pdf.Annot;
 
 namespace CourseOPR.Controllers
 {
@@ -15,6 +16,7 @@ namespace CourseOPR.Controllers
         private readonly ApplicationContext _context;
         public Parser parser= new Parser();
         string path = "D:\\C#\\text.txt";
+        public PdfCreator pdfCreator= new PdfCreator();
 
         public ScoresController(ApplicationContext context)
         {
@@ -58,6 +60,23 @@ namespace CourseOPR.Controllers
             }
             return View(score);
 
+        }
+
+        public async Task<IActionResult> GeneratePdf(int? id)
+        {
+            if (id == null || _context.Score == null)
+            {
+                return NotFound();
+            }
+            var student = await _context.Student.FirstOrDefaultAsync(c => c.StudentId == id);
+            var score = _context.Score.Where(u => u.StudentId == student.StudentId).Include(s => s.Student)
+                .Include(s => s.Subject).ToList();
+            if (score == null)
+            {
+                return NotFound();
+            }
+            var result = pdfCreator.CreatePdf(score);
+            return File(result, "application/pdf", "DownloadName.pdf");
         }
 
 
@@ -126,6 +145,7 @@ namespace CourseOPR.Controllers
             return RedirectToAction("Index");
 
         }
+
 
         // POST: Scores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

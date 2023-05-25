@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseOPR.Controllers
 {
-    [Authorize(Roles ="admin")]
+    [Authorize("admin")]
     public class UsersController : Controller
     {
         UserManager<User> _userManager;

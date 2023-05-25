@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseOPR.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class RolesController : Controller
     {
         RoleManager<IdentityRole> _roleManager;
